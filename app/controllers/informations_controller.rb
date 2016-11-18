@@ -1,5 +1,7 @@
 class InformationsController < ApplicationController
 
+before_action :authenticate_user!
+
   def index
     if params[:id]
       @information = Information.find(params[:id])

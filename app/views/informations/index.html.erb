@@ -6,8 +6,10 @@
   <!-- Table -->
   <table class="table table-hover">
     <tr>
-      <th class="col-md-3">標題</th>
-      <th>內容</th>
+      <th class="col-md-4"><h4>標題</h4></th>
+      <th><h4>內容</h4></th>
+      <th class="text-center"><h4>Edit</h4></th>
+      <th class="text-center"><h4>Delete</h4></th>
     </tr>
     <% @informations.each do |info|  %>
       <tr>
@@ -20,6 +22,17 @@
         <td>
           <%= info.paragraph %>
         </td>
+        <% if info.user = current_user %>
+          <td class="text-center">
+            <%= link_to "Edit", edit_information_path(info), :class => "btn btn-default" %>
+          </td>
+          <td class="text-center">
+            <%= link_to "Delete", information_path(info),:method => :delete, :class => "btn btn-danger"%>
+          </td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </table>
@@ -28,7 +41,7 @@
 <% if @information.new_record? %>
   <% u = informations_path %>
 <% else %>
-  <% u = edit_information_path(@information) %>
+  <% u = information_path(@information) %>
 <% end %>
 
 <%= form_for @information, :url => u do |i| %>

@@ -1,6 +1,7 @@
 class InformationsController < ApplicationController
 
 before_action :authenticate_user!
+before_action :find_info, :only => [:show, :update, :destroy]
 
   def index
     if params[:id]
@@ -13,26 +14,43 @@ before_action :authenticate_user!
   end
 
   def show
-    @information = Information.find(params[:id])
     @information_comments = @information.information_comments
+  end
+
+  def edit
+    redirect_to informations_path(:id=>params[:id])
+  end
+
+  def update
+    @information.update(info_params)
+    flash[:notice] = "information update success"
+    redirect_to informations_path
   end
 
   def create
     @information = Information.new(info_params)
-      if @information.save
-        flash[:notice] = "information create success"
-        redirect_to informations_path
-      else
-      end
+    @information.user = current_user
+    if @information.save
+      flash[:notice] = "information create success"
+      redirect_to informations_path
+    end
+  end
+
+  def destroy
+    @information.destroy
+    flash[:alert] = "information delete success"
+    redirect_to informations_path
   end
 
   private
 
-  def info_params
+  def find_info
+    @information = Information.find(params[:id])
+  end
 
+  def info_params
     params.require(:information).permit(
       :title,
       :paragraph)
-    
   end
 end

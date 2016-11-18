@@ -6,7 +6,7 @@
   <!-- Table -->
   <table class="table table-hover">
     <tr>
-      <td></td>
+      <td><%= @information.user.email.split('@').first %>'s post</td>
       <td>內容</td>
     </tr>
     <tr>
@@ -24,12 +24,11 @@
   </table>
 </div>
 
-<% @information_comments.each do |ice| %>
-  <%= form_for ice, :url => "#" do |f| %>
+<% @information_comments.each do |ice| %>  <%= form_for ice, :url => "#" do |f| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">show_user_name</span>
+          <span class="input-group-addon" id="basic-addon1"><%= ice.user.email.split("@").first %></span>
           <span class="input-group-addon" id="basic-addon2">Title:</span>
           <%= f.text_field :title, :class => "form-control", :readonly => true, :style => "background-color:#fff" %>
           <% if "a" == "comment.user == current_user" %>

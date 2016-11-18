@@ -11,7 +11,8 @@ class InformationsController < ApplicationController
   end
 
   def show
-    @information= Information.find(params[:id])
+    @information = Information.find(params[:id])
+    @information_comments = @information.information_comments
   end
 
   def create

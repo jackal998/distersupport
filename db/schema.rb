@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118083649) do
+ActiveRecord::Schema.define(version: 20161118094851) do
 
   create_table "information", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "category_id"
+    t.string   "category"
     t.string   "title"
     t.string   "paragraph"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "information_comments", force: :cascade do |t|

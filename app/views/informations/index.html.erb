@@ -21,6 +21,7 @@
         </td>
         <td>
           <%= info.paragraph %>
+          <span class="label label-warning"><%= info.category %></span> 
         </td>
         <% if info.user == current_user %>
           <td class="text-center">
@@ -53,6 +54,14 @@
           <button class="btn btn-default" type="button">Title:</button>
         </span>
         <%= i.text_field :title, :class => "form-control", :placeholder=> "Informaion..." %>
+        <span class="input-group-addon">
+          <%= radio_button_tag(:category, "emergency") %>
+            EMERGENCY
+          <%= radio_button_tag(:category, "help") %>
+            help
+          <%= radio_button_tag(:category, "news") %>
+            news
+        </span>
       </div>
     </div>
     

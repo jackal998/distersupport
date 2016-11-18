@@ -22,6 +22,12 @@ before_action :find_info, :only => [:show, :update, :destroy]
   end
 
   def update
+    case params[:category]
+    when 'emergency','help','news'
+      @information.category = params[:category]
+    else
+      @information.category = 'none'
+    end
     @information.update(info_params)
     flash[:notice] = "information update success"
     redirect_to informations_path
@@ -30,6 +36,12 @@ before_action :find_info, :only => [:show, :update, :destroy]
   def create
     @information = Information.new(info_params)
     @information.user = current_user
+    case params[:category]
+    when 'emergency','help','news'
+      @information.category = params[:category]
+    else
+      @information.category = 'none'
+    end
     if @information.save
       flash[:notice] = "information create success"
       redirect_to informations_path

@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1>Title : <%= @information.title %></h1>
+  </div>
+  <!-- Table -->
+  <table class="table table-hover">
+    <tr>
+      <td></td>
+      <td>內容</td>
+    </tr>
+    <tr>
+      <td>Paragraph</td>
+      <td><%= @information.paragraph %></td>
+    </tr>
+    <tr>
+      <td>Create time</td>
+      <td><%= @information.created_at %></td>
+    </tr>
+    <tr>
+      <td>Last update</td>
+      <td><%= @information.updated_at %></td>
+    </tr>
+  </table>
+</div>
+
+<%= form_for @information, :url => u do |i| %>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Title:</button>
+        </span>
+        <%= i.text_field :title, :class => "form-control", :placeholder=> "Informaion..." %>
+      </div>
+    </div>
+    
+    <div class="panel-body">
+      <%= i.text_area :paragraph, :class => "form-control" %>
+    </div>
+
+    <div class="panel-body">
+      <div class="input-group">
+
+        <%= i.submit "submit", :class => "btn btn-default text-right" %>
+        
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>    
+<% end %>
+
+<%= link_to "index", informations_path, :class=>"btn btn-default" %>

@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1>Information List</h1>
+  </div>
+  <!-- Table -->
+  <table class="table table-hover">
+    <tr>
+      <th class="col-md-3">標題</th>
+      <th>內容</th>
+    </tr>
+    <% @informations.each do |info|  %>
+      <tr>
+        <td>
+          <%= link_to info.title, information_path(info), :class => "text-left btn-link" %>        
+          <div class="pull-right">
+            <span class="badge"><%= info.created_at %></span> 
+          </div> 
+        </td>
+        <td>
+          <%= info.paragraph %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<% if @information.new_record? %>
+  <% u = informations_path %>
+<% else %>
+  <% u = edit_information_path(@information) %>
+<% end %>
+
+<%= form_for @information, :url => u do |i| %>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Title:</button>
+        </span>
+        <%= i.text_field :title, :class => "form-control", :placeholder=> "Informaion..." %>
+      </div>
+    </div>
+    
+    <div class="panel-body">
+      <%= i.text_area :paragraph, :class => "form-control" %>
+    </div>
+
+    <div class="panel-body">
+      <div class="input-group">
+
+        <%= i.submit "submit", :class => "btn btn-default text-right" %>
+        
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" aria-label="Left Align" value="Input">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>    
+<% end %>
+
+<%= paginate @informations, :window => 2 %>

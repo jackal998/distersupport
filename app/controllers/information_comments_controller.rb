@@ -10,6 +10,13 @@ class InformationCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @information = Information.find(params[:info])
+    @information.information_comments.find(params[:id]).destroy
+    flash[:alert] = "comment deleted"
+    redirect_to information_path(params[:info])
+  end
+
   private
 
   def information_comment_params

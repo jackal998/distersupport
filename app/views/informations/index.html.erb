@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">
-    <h1>Information List</h1>
+    <h1>鍵盤災情支援網</h1>
   </div>
   <!-- Table -->
   <table class="table table-hover">
@@ -22,7 +22,7 @@
         <td>
           <%= info.paragraph %>
         </td>
-        <% if info.user = current_user %>
+        <% if info.user == current_user %>
           <td class="text-center">
             <%= link_to "Edit", edit_information_path(info), :class => "btn btn-default" %>
           </td>

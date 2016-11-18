@@ -31,9 +31,9 @@
           <span class="input-group-addon" id="basic-addon1"><%= ice.user.email.split("@").first %></span>
           <span class="input-group-addon" id="basic-addon2">Title:</span>
           <%= f.text_field :title, :class => "form-control", :readonly => true, :style => "background-color:#fff" %>
-          <% if "a" == "comment.user == current_user" %>
+          <% if ice.user == current_user %>
             <span class="input-group-btn" id="basic-addon3">
-              <%= link_to "Del", user_comment_path(comment,:obj => @obj), :method=>"delete", :class =>"btn btn-danger" %>
+              <%= link_to "Del", information_comment_path(ice,:info => @information), :method=>"delete", :class =>"btn btn-danger" %>
             </span>          
           <% end %>
         </div>

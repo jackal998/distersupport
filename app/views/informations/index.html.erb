@@ -14,14 +14,14 @@
     <% @informations.each do |info|  %>
       <tr>
         <td>
-          <%= link_to info.title, information_path(info), :class => "text-left btn-link" %>        
+          <%= link_to info.title, information_path(info), :class => "text-left btn-link" %>
           <div class="pull-right">
-            <span class="badge"><%= info.created_at %></span> 
-          </div> 
+            <span class="badge"><%= info.created_at %></span>
+          </div>
         </td>
         <td>
           <%= info.paragraph %>
-          <span class="label label-warning"><%= info.category %></span> 
+          <span class="label label-warning"><%= info.category %></span>
         </td>
         <% if info.user == current_user %>
           <td class="text-center">
@@ -46,7 +46,13 @@
 <% end %>
 
 <%= form_for @information, :url => u do |i| %>
-
+    <% if @information.errors.any? %>
+        <ul>
+          <% @information.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
   <div class="panel panel-success">
     <div class="panel-heading">
       <div class="input-group">
@@ -55,16 +61,14 @@
         </span>
         <%= i.text_field :title, :class => "form-control", :placeholder=> "Informaion..." %>
         <span class="input-group-addon">
-          <%= radio_button_tag(:category, "emergency") %>
-            EMERGENCY
-          <%= radio_button_tag(:category, "help") %>
-            help
-          <%= radio_button_tag(:category, "news") %>
-            news
+          <!--這種方式新增類別沒有比較好 維護跟修改都比較麻煩-->
+          <%= i.radio_button(:category, "emergency") %>EMERGENCY
+          <%= i.radio_button(:category, "help") %>help
+          <%= i.radio_button(:category, "news") %>news
         </span>
       </div>
     </div>
-    
+
     <div class="panel-body">
       <%= i.text_area :paragraph, :class => "form-control" %>
     </div>
@@ -75,7 +79,7 @@
       </div>
     </div>
 
-  </div>    
+  </div>
 <% end %>
 
 <%= paginate @informations, :window => 2 %>
